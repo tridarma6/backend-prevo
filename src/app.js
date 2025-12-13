@@ -30,6 +30,17 @@ app.use('/maintenance-tickets', maintenanceTicketRoutes);
 app.use('/assign-maintenance-tasks', assignMaintenanceTicketRoutes);
 app.use('/assign-engineer-tasks', assignEngineerRoutes);
 
+app.get('/db-test', async (req, res) => {
+  try {
+    const db = require('./config/db');
+    const result = await db.query('SELECT NOW()');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // Global Error Handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({
