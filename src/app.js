@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://capstone-predictive-anomaly-mainten-eight.vercel.app',
+    'https://prevo-predictive-maintenance.vercel.app',
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
