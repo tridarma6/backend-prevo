@@ -11,12 +11,12 @@ const assignEngineerRoutes = require('./routes/assignEngineerRoutes');
 const app = express();
 
 /* =========================
-   CORS 
+   CORS
 ========================= */
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://backend-prevo.vercel.app'
+    'https://capstone-predictive-anomaly-mainten-eight.vercel.app',
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -28,9 +28,6 @@ app.options('*', cors());
 
 app.use(express.json());
 
-/* =========================
-   ROUTES
-========================= */
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/chatbot', aiAgentRoutes);
@@ -48,9 +45,6 @@ app.get('/db-test', async (req, res) => {
   }
 });
 
-/* =========================
-   404 HANDLER (TANPA err)
-========================= */
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
