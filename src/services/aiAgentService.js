@@ -1,10 +1,17 @@
 const axios = require('axios');
 const db = require('../config/db');
 
+// for testing akun
 // production
-const N8N_WEBHOOK_URL = 'https://puturifkidy.app.n8n.cloud/webhook/587f195c-b8fb-4d4f-9018-88fcd02a627f';
+// const N8N_WEBHOOK_URL = 'https://puturifkidy.app.n8n.cloud/webhook/587f195c-b8fb-4d4f-9018-88fcd02a627f';
 // local
 // const N8N_WEBHOOK_URL = 'https://puturifkidy.app.n8n.cloud/webhook-test/587f195c-b8fb-4d4f-9018-88fcd02a627f';
+
+// for penilaian asah
+// production
+const N8N_WEBHOOK_URL = 'https://dirkayuda.app.n8n.cloud/webhook/587f195c-b8fb-4d4f-9018-88fcd02a627f';
+// local
+// const N8N_WEBHOOK_URL = 'https://dirkayuda.app.n8n.cloud/webhook-test/587f195c-b8fb-4d4f-9018-88fcd02a627f';
 class AIAgentService {
   async sendChatToAgent(message, userId) {
     const created_at = new Date().toISOString();
