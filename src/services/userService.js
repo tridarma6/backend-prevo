@@ -32,6 +32,10 @@ class UserService {
   async updateUserId(id, { name, email, phone_number, role, password }) {
     const updated_at = new Date().toISOString();
     const hashedPassword = await bcrypt.hash(password, 10);
+    const isChatbot = await db.query('SELECT email FROM users WHERE email = $1', ['predictachatbot@gmail.com']);
+    if (isChatbot.rows[0]) {
+      throw new Error('Cannot update chatbot user');
+    }
     const result = await db.query('UPDATE users SET name = $1, email = $2, phone_number = $3, role = $4, password = $5, updated_at = $6 WHERE id = $7 RETURNING id', [name, email, phone_number, role, hashedPassword, updated_at, id]);
 
     if (!result.rows.length) {
@@ -41,6 +45,10 @@ class UserService {
 
   async deleteUserById(id) {
     const isAdmin = await db.query('SELECT role FROM users WHERE id = $1', [id]);
+    const isChatbot = await db.query('SELECT email FROM users WHERE email = $1', ['predictachatbot@gmail.com']);
+    if (isChatbot.rows[0]) {
+      throw new Error('Cannot delete chatbot user');
+    }
     if (isAdmin.rows[0].role === 'admin') {
       throw new Error('Cannot delete admin user');
     }
@@ -54,7 +62,6 @@ class UserService {
     const result = await db.query('SELECT COUNT(*) FROM users WHERE role = $1', ['user']);
     return result.rows[0].count;
   }
-
 }
 
 module.exports = new UserService();
