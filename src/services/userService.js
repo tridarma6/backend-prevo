@@ -32,7 +32,8 @@ class UserService {
   async updateUserId(id, { name, email, phone_number, role, password }) {
     const updated_at = new Date().toISOString();
     const hashedPassword = await bcrypt.hash(password, 10);
-    const isChatbot = await db.query('SELECT email FROM users WHERE email = $1', [email]);
+    const isChatbot = await db.query('SELECT email FROM users WHERE id = $1', [id]);
+    console.log(isChatbot.rows[0]);
     if (isChatbot.rows[0] == 'predictachatbot@gmail.com') {
       throw new Error('Cannot update chatbot user');
     }
@@ -45,7 +46,7 @@ class UserService {
 
   async deleteUserById(id) {
     const isAdmin = await db.query('SELECT role FROM users WHERE id = $1', [id]);
-    const isChatbot = await db.query('SELECT email FROM users WHERE email = $1', [email]);
+    const isChatbot = await db.query('SELECT email FROM users WHERE id = $1', [id]);
     if (isChatbot.rows[0] == 'predictachatbot@gmail.com') {
       throw new Error('Cannot update chatbot user');
     }
