@@ -15,9 +15,9 @@ const db = require('../config/db');
 
 // for penjurian best capstone
 // local
-const N8N_WEBHOOK_URL = 'https://dirkayudaputurifki.app.n8n.cloud/webhook-test/a5ad1ce9-ccb6-405b-86f4-27845b8fae83';
+// const N8N_WEBHOOK_URL = 'https://dirkayudaputurifki.app.n8n.cloud/webhook-test/a5ad1ce9-ccb6-405b-86f4-27845b8fae83';
 // production
-// const N8N_WEBHOOK_URL = 'https://dirkayudaputurifki.app.n8n.cloud/webhook/a5ad1ce9-ccb6-405b-86f4-27845b8fae83';
+const N8N_WEBHOOK_URL = 'https://dirkayudaputurifki.app.n8n.cloud/webhook/a5ad1ce9-ccb6-405b-86f4-27845b8fae83';
 class AIAgentService {
   async sendChatToAgent(message, userId) {
     const created_at = new Date().toISOString();
